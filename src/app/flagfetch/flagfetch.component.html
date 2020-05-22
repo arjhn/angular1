@@ -1,0 +1,8 @@
+<div class="innercontainer">
+  <ul>
+    <li *ngFor="let Flag of FlagsObject">
+        <img [src]="Flag.flag" width="200" [alt]="Flag.capital"/>
+        <p>{{Flag.name}}</p>
+    </li>
+  </ul>
+</div>
