@@ -10,12 +10,21 @@ export class FlagfetchComponent implements OnInit {
 
   FlagsObject:Object;
 
+  searchValue:String=''
+
   constructor(private _flags:FlagsService) { }
 
   ngOnInit(): void {
-    this._flags.flagFun().subscribe(data =>{
+    this._flags.flagFun(this.searchValue).subscribe(data =>{
       this.FlagsObject=data
       console.log(this.FlagsObject)
+    })
+  }
+
+  flagSearch(value){
+    this.searchValue=value
+    this._flags.flagFun(this.searchValue).subscribe(data=>{
+      this.FlagsObject=data
     })
   }
 

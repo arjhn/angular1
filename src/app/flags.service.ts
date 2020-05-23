@@ -9,8 +9,11 @@ export class FlagsService {
 
   constructor( private http:HttpClient) { }
 
-  flagFun(){
+  flagFun(searchValue){
+    if(searchValue=='')
     return this.http.get('https://restcountries.eu/rest/v2/all')
+    else
+    return this.http.get('https://restcountries.eu/rest/v2/name/'+searchValue)
   }
 
 }

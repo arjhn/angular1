@@ -1,4 +1,5 @@
 <div class="innercontainer">
+  <input type="search" [ngModel]="searchValue" (ngModelChange)='flagSearch($event)' >
   <ul>
     <li *ngFor="let Flag of FlagsObject">
         <img [src]="Flag.flag" width="200" [alt]="Flag.capital"/>
