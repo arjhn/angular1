@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlagfetchComponent } from './flagfetch/flagfetch.component';
+import { FlagInfoComponent } from './flag-info/flag-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlagfetchComponent
+    FlagfetchComponent,
+    FlagInfoComponent
   ],
   imports: [
     BrowserModule,

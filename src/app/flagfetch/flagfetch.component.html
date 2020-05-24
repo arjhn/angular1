@@ -2,7 +2,7 @@
   <input type="search" [ngModel]="searchValue" (ngModelChange)='flagSearch($event)' >
   <ul>
     <li *ngFor="let Flag of FlagsObject">
-        <img [src]="Flag.flag" width="200" [alt]="Flag.capital"/>
+        <img [src]="Flag.flag" width="200" (click)="redirectFlag(Flag.name)"/>
         <p>{{Flag.name}}</p>
     </li>
   </ul>

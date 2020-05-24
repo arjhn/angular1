@@ -1,0 +1,34 @@
+<div *ngFor="let country of countryDetails">
+    <div>
+        <strong> Country Name :</strong>
+        {{country.name}}
+    </div>
+    <div>
+        <strong> Continent :</strong>
+        {{country.region}}
+    </div>
+    <div>
+        <strong> Capital :</strong>
+        {{country.capital}}
+    </div>
+    <div>
+        <strong> Area :</strong>
+        {{country.area}} Sq.Km
+    </div>
+    <div>
+        <strong> Population :</strong>
+        {{country.population}}
+    </div>
+    <div>
+        <strong> Currency :</strong>
+        {{currencyString}}
+    </div>
+    <div>
+        <strong> Language(s) :</strong>
+        {{languageString}}
+    </div>
+    <div>
+        <strong> Border Countries :</strong>
+        {{borderString}}
+    </div>
+</div>
