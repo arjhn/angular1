@@ -3,7 +3,7 @@ import {FlagsService} from '../flags.service';
 import { Router } from '@angular/router';
 import { trigger,transition,animate,style,state, query, stagger, keyframes } from '@angular/animations';
 
-let screenString =screen.width>500?'100%':'0'
+let screenString =screen.width>500?'100%,0':'0,-20%'
 
 @Component({
   selector: 'app-flagfetch',
@@ -18,7 +18,7 @@ let screenString =screen.width>500?'100%':'0'
           ])
         ], { optional: true }),
         query(':enter', [
-          style({ opacity: 0,transform:`translate(${screenString},-10%)` }),
+          style({ opacity: 0,transform:`translate(${screenString})` }),
           stagger(30, [
             animate('0.2s', style({ opacity: 1,transform:'translate(0,0)' }))
           ])
