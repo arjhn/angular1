@@ -8,28 +8,31 @@ import { trigger,transition,animate,style,state, query, stagger, keyframes } fro
   templateUrl: './flagfetch.component.html',
   styleUrls: ['./flagfetch.component.scss'],
   animations:[
-    trigger('listAnimation',[
-      transition('*=>true',[
-        query('li', style({ opacity: 0 })),
-        query('li', animate(300, style({ opacity: 1 })))
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':leave', [
+          stagger(100, [
+            animate('0.5s', style({ opacity: 0 }))
+          ])
+        ], { optional: true }),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(100, [
+            animate('0.5s', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
     ])
-  ])
-    /**trigger('listAnimation',[
-      transition(':enter',[
-        style({opacity:0}),
-        animate('0.5s',style({opacity:1}))
-      ]),
-      transition(':leave',[
-        animate('0.2s',style({opacity:0}))
-      ])      
-    ])**/
   ]
 })
 
 export class FlagfetchComponent implements OnInit {
 
   FlagsObject:Object; 
-  presentFlag:boolean=false; 
+  presentFlag:boolean=false;
+  flagSrc:String[];
+  flagName:String[];
+
 
   searchValue:String=''
 
@@ -38,22 +41,27 @@ export class FlagfetchComponent implements OnInit {
 
   ngOnInit(): void {
     this._flags.flagsAll().subscribe(data =>{
-      this.FlagsObject=data
-      //console.log(this.FlagsObject)
+      this.flagSrc=this.arrayParser(data,[],'flag')
+      this.flagName=this.arrayParser(data,[],'name')
     })
   }
 
   flagSearch(value:String){
     this.searchValue=value
-    this.presentFlag=false
     this._flags.flagsSearch(this.searchValue).subscribe(data=>{
-      this.FlagsObject=data
-      this.presentFlag=true
+      this.flagSrc=this.arrayParser(data,[],'flag')
+      this.flagName=this.arrayParser(data,[],'name')
     })
   }
 
   redirectFlag(Name:String){
     this._router.navigate(["flag/"+Name])
+  }
+
+  arrayParser(data:Object,temp:String[],tag:String):String[]{
+    for(let i=0;i<Object.keys(data).length;i++)
+      temp.push(data[i][tag])
+    return temp
   }
 
 }
