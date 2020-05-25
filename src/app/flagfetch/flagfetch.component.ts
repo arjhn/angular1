@@ -3,6 +3,8 @@ import {FlagsService} from '../flags.service';
 import { Router } from '@angular/router';
 import { trigger,transition,animate,style,state, query, stagger, keyframes } from '@angular/animations';
 
+let screenString =screen.width>500?'100%':'0'
+
 @Component({
   selector: 'app-flagfetch',
   templateUrl: './flagfetch.component.html',
@@ -16,7 +18,7 @@ import { trigger,transition,animate,style,state, query, stagger, keyframes } fro
           ])
         ], { optional: true }),
         query(':enter', [
-          style({ opacity: 0,transform:'translate(100%,-10%)' }),
+          style({ opacity: 0,transform:`translate(${screenString},-10%)` }),
           stagger(30, [
             animate('0.2s', style({ opacity: 1,transform:'translate(0,0)' }))
           ])
@@ -25,6 +27,7 @@ import { trigger,transition,animate,style,state, query, stagger, keyframes } fro
     ])
   ]
 })
+
 
 export class FlagfetchComponent implements OnInit {
 
