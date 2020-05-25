@@ -11,14 +11,14 @@ import { trigger,transition,animate,style,state, query, stagger, keyframes } fro
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
         query(':leave', [
-          stagger(100, [
-            animate('0.5s', style({ opacity: 0 }))
+          stagger(0, [
+            animate('0.05s', style({ opacity: 0 }))
           ])
         ], { optional: true }),
         query(':enter', [
-          style({ opacity: 0 }),
-          stagger(100, [
-            animate('0.5s', style({ opacity: 1 }))
+          style({ opacity: 0,transform:'translate(100%,-10%)' }),
+          stagger(30, [
+            animate('0.2s', style({ opacity: 1,transform:'translate(0,0)' }))
           ])
         ], { optional: true })
       ])
@@ -48,10 +48,18 @@ export class FlagfetchComponent implements OnInit {
 
   flagSearch(value:String){
     this.searchValue=value
-    this._flags.flagsSearch(this.searchValue).subscribe(data=>{
-      this.flagSrc=this.arrayParser(data,[],'flag')
-      this.flagName=this.arrayParser(data,[],'name')
-    })
+    this.flagSrc=[]
+    this.flagName=[]
+    if(value !='')
+      this._flags.flagsSearch(this.searchValue).subscribe(data=>{
+        this.flagSrc=this.arrayParser(data,[],'flag')
+        this.flagName=this.arrayParser(data,[],'name')
+      })
+    else
+      this._flags.flagsAll().subscribe(data =>{
+        this.flagSrc=this.arrayParser(data,[],'flag')
+        this.flagName=this.arrayParser(data,[],'name')
+      })
   }
 
   redirectFlag(Name:String){
