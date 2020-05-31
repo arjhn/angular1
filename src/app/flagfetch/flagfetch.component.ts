@@ -3,7 +3,8 @@ import {FlagsService} from '../flags.service';
 import { Router } from '@angular/router';
 import { trigger,transition,animate,style,state, query, stagger, keyframes } from '@angular/animations';
 
-let screenString =screen.width>500?'100%,0':'0,-20%'
+let screenString =screen.width>500?'100%,0':'0,-20%';
+let mobileTransl=screen.width>500?'translateX(-100%)':'translateY(100%)';
 
 @Component({
   selector: 'app-flagfetch',
@@ -28,7 +29,7 @@ let screenString =screen.width>500?'100%,0':'0,-20%'
     trigger('childPresent',[
       transition(':leave',[
         style({transform:'none'}),
-        animate('0.2s',style({transform:'translateX(-100%)'}))
+        animate('0.2s',style({transform:`${mobileTransl}`}))
       ])
 
     ])
@@ -42,7 +43,7 @@ export class FlagfetchComponent implements OnInit {
   presentFlag:boolean=false;
   flagSrc:String[];
   flagName:String[];
-  widthimage:String='250px'
+  txValue:String[]=[];
 
 
   searchValue:String=''
@@ -82,6 +83,11 @@ export class FlagfetchComponent implements OnInit {
     for(let i=0;i<Object.keys(data).length;i++)
       temp.push(data[i][tag])
     return temp
+  }
+
+  translateValue(tX:String){
+    this.txValue.push(tX)
+    //console.log(this.txValue)
   }
 
 }

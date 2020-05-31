@@ -9,8 +9,8 @@
   <div> 
     <ul [@listAnimation]="flagName.length">
       <li *ngFor="let Flag of flagName;let i=index">
-        <img [src]="flagSrc[i]" (click)="redirectFlag(Flag)" appImageheight>
-          <p>{{Flag}}</p>
+        <img [src]="flagSrc[i]" (click)="redirectFlag(Flag)" appImageheight (onValueUpdate)="translateValue($event)" >
+          <p [style.transform]="'translateY('+txValue[i]+'px)'">{{Flag}}</p>
       </li>
     </ul>
   </div>

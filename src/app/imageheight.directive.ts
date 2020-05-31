@@ -1,4 +1,4 @@
-import { Directive,ElementRef,Renderer2 } from '@angular/core';
+import { Directive,ElementRef,Renderer2,Output,EventEmitter} from '@angular/core';
 
 @Directive({
   selector: '[appImageheight]'
@@ -9,6 +9,8 @@ export class ImageheightDirective {
   customWidth:number=200;
   scaleRatio:number=0;
 
+  @Output() onValueUpdate= new EventEmitter();
+
   constructor(private el:ElementRef,
       private renderer:Renderer2) { 
     
@@ -16,18 +18,14 @@ export class ImageheightDirective {
 
   ngOnInit(){
     
-    if(this.el.nativeElement.offsetHeight>150){
-          
+    if(this.el.nativeElement.offsetHeight>150){          
       this.renderer.removeStyle(this.el.nativeElement,'width');
       this.renderer.setStyle(this.el.nativeElement,'height','150px')
-
     }
-    console.clear()
-    console.log(this.el.nativeElement.offsetHeight+'-'+this.el.nativeElement.offsetWidth)
 
-    this.scaleRatio=(150-this.el.nativeElement.offsetHeight)/2
-    //this.renderer.setStyle(this.el.nativeElement,'transform',`translateY(${this.scaleRatio}px)`)
-
+    this.scaleRatio=(150-this.el.nativeElement.offsetHeight)/2;
+    this.renderer.setStyle(this.el.nativeElement,'transform',`translateY(${this.scaleRatio}px)`);
+    this.onValueUpdate.emit(''+this.scaleRatio+'')
   }
 
 }
