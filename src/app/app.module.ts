@@ -10,12 +10,14 @@ import { FlagInfoComponent } from './flag-info/flag-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { ImageheightDirective } from './imageheight.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlagfetchComponent,
-    FlagInfoComponent
+    FlagInfoComponent,
+    ImageheightDirective
   ],
   imports: [
     BrowserModule,

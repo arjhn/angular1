@@ -24,6 +24,13 @@ let screenString =screen.width>500?'100%,0':'0,-20%'
           ])
         ], { optional: true })
       ])
+    ]),
+    trigger('childPresent',[
+      transition(':leave',[
+        style({transform:'none'}),
+        animate('0.2s',style({transform:'translateX(-100%)'}))
+      ])
+
     ])
   ]
 })
@@ -35,6 +42,7 @@ export class FlagfetchComponent implements OnInit {
   presentFlag:boolean=false;
   flagSrc:String[];
   flagName:String[];
+  widthimage:String='250px'
 
 
   searchValue:String=''
@@ -66,6 +74,7 @@ export class FlagfetchComponent implements OnInit {
   }
 
   redirectFlag(Name:String){
+    this.presentFlag=true
     this._router.navigate(["flag/"+Name])
   }
 
