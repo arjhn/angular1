@@ -3,7 +3,7 @@ import {FlagsService} from '../flags.service';
 import { Router } from '@angular/router';
 import { trigger,transition,animate,style,state, query, stagger, keyframes } from '@angular/animations';
 
-let screenString =screen.width>500?'100%,0':'0,-20%';
+let screenString =screen.width>500?'100%,0':'0,-50%';
 let mobileTransl=screen.width>500?'translateX(-100%)':'translateY(100%)';
 
 @Component({
