@@ -44,7 +44,7 @@ export class FlagfetchComponent implements OnInit {
   flagSrc:String[];
   flagName:String[];
   txValue:String[]=[];
-
+  imagePresent:boolean[];
 
   searchValue:String=''
 
@@ -56,12 +56,14 @@ export class FlagfetchComponent implements OnInit {
       this.flagSrc=this.arrayParser(data,[],'flag')
       this.flagName=this.arrayParser(data,[],'name')
     })
+    this.txValue=[]
   }
 
   flagSearch(value:String){
     this.searchValue=value
     this.flagSrc=[]
     this.flagName=[]
+    this.txValue=[]
     if(value !='')
       this._flags.flagsSearch(this.searchValue).subscribe(data=>{
         this.flagSrc=this.arrayParser(data,[],'flag')
@@ -87,7 +89,11 @@ export class FlagfetchComponent implements OnInit {
 
   translateValue(tX:String){
     this.txValue.push(tX)
-    //console.log(this.txValue)
+    this.imagePresent.push(true)
+    //console.log(tX)
   }
 
+  refresh(){
+    this.ngOnInit()
+  }
 }

@@ -7,9 +7,9 @@
   </mat-form-field>
   
   <div> 
-    <ul [@listAnimation]="flagName.length">
+    <ul [@listAnimation]="flagName">
       <li *ngFor="let Flag of flagName;let i=index">
-        <img [src]="flagSrc[i]" (click)="redirectFlag(Flag)" appImageheight (onValueUpdate)="translateValue($event)" >
+        <img [src]="flagSrc[i]" (click)="redirectFlag(Flag)" appImageheight (onValueUpdate)="translateValue($event)">
           <p [style.transform]="'translateY('+txValue[i]+'px)'">{{Flag}}</p>
       </li>
     </ul>
