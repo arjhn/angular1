@@ -21,6 +21,7 @@ import { trigger,transition,animate,style,state, query, stagger, keyframes } fro
     ])
   ]
 })
+
 export class FlagInfoComponent implements OnInit {
 
   countryDetails:Object;
@@ -29,7 +30,9 @@ export class FlagInfoComponent implements OnInit {
   currencyString:String='';
   borderCountry:String[]=[];
   wikiSummary:String='';
-
+  flexTry:String='';
+  flexLayout:String=''
+  
   constructor(private _activatedRoute:ActivatedRoute,
                 private _flagService:FlagsService,
                 private _wikiInfo:WikiInfoService) { }
@@ -41,6 +44,8 @@ export class FlagInfoComponent implements OnInit {
       this.finalString=[];
       this.wikiSummary='';
       
+      this.screenCheck()
+
       this._flagService.flagFullSearch(params.id).subscribe(data=>{
         this.countryDetails=data
         this.languageString=this.loopDeclassify(this.countryDetails[0].languages)
@@ -72,6 +77,20 @@ export class FlagInfoComponent implements OnInit {
         this.borderCountry.push(data['name'])
       })
     })
+  }
+
+  screenCheck(){
+
+    if(screen.width<600){
+      this.flexTry='1 1 80%';
+      this.flexLayout="center"
+    }
+      
+    else{
+      this.flexTry='1 1 30%';
+      this.flexLayout="end"
+    }
+
   }
 
 }

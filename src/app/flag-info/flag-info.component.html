@@ -1,7 +1,7 @@
 <div *ngFor="let country of countryDetails" class="infoContainer" fxLayout="column" @infoListen >
     
-    <div class="header" fxLayout="row" fxLayoutAlign="end">
-        <app-header fxFlex='1 1 20%'></app-header>
+    <div class="header" fxLayout="row" [fxLayoutAlign]="flexLayout">
+        <app-header [fxFlex]='flexTry'></app-header>
     </div>
 
     <div class="top">
@@ -40,7 +40,7 @@
         </div>
         <div>
             <strong> Border Countries :</strong>
-            <ul fxLayout="row" fxLayoutGap="0.3em">
+            <ul fxLayout="row wrap" fxLayoutGap="0.3em">
                 <li *ngFor="let country of borderCountry;let i=index">
                     <a [routerLink]="['/flag/'+country]">{{country}}</a>
                 </li>

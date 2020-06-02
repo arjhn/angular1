@@ -1,16 +1,16 @@
 <div class="innercontainer">
   
-  <div class="fHomeHeader" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="0.5em">
+  <div class="fHomeHeader" fxLayout="row" [fxLayoutAlign]="flexLayout" fxLayoutGap="0.5em">
 
-    <mat-form-field class="searchbar" fxFlex='1 1 40%' >
+    <mat-form-field class="searchbar" [fxFlex]="flexTry">
       <mat-label>Search</mat-label>
       <input type="search" matInput placeholder="Country Name" [ngModel]="searchValue" (ngModelChange)='flagSearch($event)'>
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <div fxFlex="1 1 10%"></div>
-    <app-header fxFlex='1 1 20%'></app-header>
-    <div fxFlex="1 1 5%"></div>
+    <div fxFlex="1 1 10%" *ngIf="menuPresent" ></div>
+    <app-header fxFlex='1 1 20%' *ngIf="menuPresent" ></app-header>
+    <div fxFlex="1 1 5%" *ngIf="menuPresent" ></div>
 
   </div>
   
@@ -28,11 +28,10 @@
 
   </div>
 
-  <div class="introClass" *ngIf="!flagName">
-    <p>Hey,</p>
-    <p>The WebApp displays a few details about the countries you search for in the SearchBar above </p> 
-    <p>Feel free to checkout.</p>
-    <p>Thanks a ton !!</p>
+  <div class="introClass" *ngIf="!flagName" [@introAnim]="introText" [style]="introStyle" >
+    <p *ngFor="let intro of introText">
+      {{intro}}
+    </p>
   </div>
 
 </div>
