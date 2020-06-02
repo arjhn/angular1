@@ -14,6 +14,7 @@ import { ImageheightDirective } from './imageheight.directive';
 import {  FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateImageDirective } from './translate-image.directive';
 import { HeaderComponent } from './header/header.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HeaderComponent } from './header/header.component';
     FlagInfoComponent,
     ImageheightDirective,
     TranslateImageDirective,
-    HeaderComponent
+    HeaderComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

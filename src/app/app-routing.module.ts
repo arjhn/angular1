@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FlagfetchComponent } from './flagfetch/flagfetch.component';
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path:'flag/:id',
     component:FlagInfoComponent
+  },
+  {
+    path:'about',
+    component:AboutComponent
   }
 ];
 
