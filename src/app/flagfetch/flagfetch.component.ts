@@ -1,7 +1,7 @@
 import { HeaderComponent } from './../header/header.component';
 import { Component, OnInit } from '@angular/core';
 import {FlagsService} from '../flags.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { trigger,transition,animate,style,state, query, stagger, keyframes } from '@angular/animations';
 
 let screenString =screen.width>600?'100%,0':'0,-50%';
@@ -82,12 +82,23 @@ export class FlagfetchComponent implements OnInit {
     width: '50vw'
   }
 
+  queryParam:String=''
+
   constructor(private _flags:FlagsService,
-              private _router:Router) { }
+              private _router:Router,
+              private _activeRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.txValue=[]
     this.screenChecker()
+    
+    this._activeRoute.queryParams.subscribe(params=>{
+      this.queryParam=params['first']
+    })
+
+    if(this.queryParam==='no'){
+      this.allFlags()
+    }
 
   }
 
@@ -105,10 +116,7 @@ export class FlagfetchComponent implements OnInit {
       })
     
     else
-      this._flags.flagsAll().subscribe(data =>{
-        this.flagSrc=this.arrayParser(data,[],'flag')
-        this.flagName=this.arrayParser(data,[],'name')
-      })
+      this.allFlags()
   
   }
 
@@ -149,5 +157,12 @@ export class FlagfetchComponent implements OnInit {
       this.flexLayout="end"
     }
 
+  }
+
+  allFlags(){
+    this._flags.flagsAll().subscribe(data =>{
+      this.flagSrc=this.arrayParser(data,[],'flag')
+      this.flagName=this.arrayParser(data,[],'name')
+    })
   }
 }
