@@ -1,3 +1,4 @@
+import { WikiInfoService } from './../wiki-info.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FlagsService } from '../flags.service';
@@ -13,13 +14,20 @@ export class FlagInfoComponent implements OnInit {
   finalString:String[];
   languageString:String='';
   currencyString:String='';
-  borderString:String='';
+  borderCountry:String[]=[];
+  wikiSummary:String='';
 
   constructor(private _activatedRoute:ActivatedRoute,
-                private _flagService:FlagsService) { }
+                private _flagService:FlagsService,
+                private _wikiInfo:WikiInfoService) { }
 
   ngOnInit(): void {
+    
     this._activatedRoute.params.subscribe(params=>{
+      this.borderCountry=[];
+      this.finalString=[];
+      this.wikiSummary='';
+      
       this._flagService.flagFullSearch(params.id).subscribe(data=>{
         this.countryDetails=data
         this.languageString=this.loopDeclassify(this.countryDetails[0].languages)
@@ -27,6 +35,11 @@ export class FlagInfoComponent implements OnInit {
         this.borderDeclassify(this.countryDetails[0].borders)
         //console.log(this.countryDetails)
       })
+
+      this._wikiInfo.wikiSummary(params.id).subscribe(data=>{
+        this.wikiSummary=data['extract_html']
+      })
+
     })
   }
 
@@ -40,13 +53,12 @@ export class FlagInfoComponent implements OnInit {
 
   borderDeclassify(arr:String[]){
     this.finalString=[];
-    this.borderString='';
+    this.borderCountry=[];
     arr.forEach(elem=>{
       this._flagService.flagCodeSearch(elem).subscribe(data=>{
-        this.borderString=this.borderString+""+(data['name'].indexOf('(')!=-1?data['name'].substring(0,data['name'].indexOf('(')):data['name'])+", "
+        this.borderCountry.push(data['name'])
       })
     })
-    arr.length<1?this.borderString="None":this.borderString
   }
 
 }

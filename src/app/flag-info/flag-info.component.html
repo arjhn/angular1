@@ -1,24 +1,29 @@
-<div *ngFor="let country of countryDetails" class="infoContainer">
-    <div class="left">
-        <strong> Country Name :</strong>
-        {{country.name}}
+<div *ngFor="let country of countryDetails" class="infoContainer" fxLayout="column" >
+    <div class="top">
+        <div>
+            <img [src]="country.flag" appTranslateImage>
+        </div>
+        <div class="texty"></div>
     </div>
-    <div class="right">
+    <div class="bottom">
+        <h1>{{country.name}}</h1>
+        
+        <div>
+            <strong> Capital :</strong>
+            {{country.capital}}
+        </div>
+
         <div>
             <strong> Continent :</strong>
             {{country.region}}
         </div>
         <div>
-            <strong> Capital :</strong>
-            {{country.capital}}
-        </div>
-        <div>
             <strong> Area :</strong>
-            {{country.area}} Sq.Km
+            {{country.area | number}} Sq.Km
         </div>
         <div>
             <strong> Population :</strong>
-            {{country.population}}
+            {{country.population | number}}
         </div>
         <div>
             <strong> Currency :</strong>
@@ -30,7 +35,18 @@
         </div>
         <div>
             <strong> Border Countries :</strong>
-            {{borderString}}
+            <ul fxLayout="row" fxLayoutGap="0.3em">
+                <li *ngFor="let country of borderCountry;let i=index">
+                    <a [routerLink]="['/flag/'+country]">{{country}}</a>
+                </li>
+                <li *ngIf="!borderCountry.length">
+                    None
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="wikiSummary">
+            <strong>Genearl Information:</strong>
+            <div [innerHtml]="wikiSummary"></div>
         </div>
     </div>
 </div>

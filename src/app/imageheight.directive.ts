@@ -30,4 +30,9 @@ export class ImageheightDirective{
     this.onValueUpdate.emit(this.scaleRatio)
   }
 
+  ngOnDestroy(){
+    this.renderer.removeStyle(this.el.nativeElement,'transform');
+    this.scaleRatio=0;
+  }
+
 }

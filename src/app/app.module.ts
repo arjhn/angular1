@@ -9,15 +9,18 @@ import { FlagfetchComponent } from './flagfetch/flagfetch.component';
 import { FlagInfoComponent } from './flag-info/flag-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { ImageheightDirective } from './imageheight.directive';
+import {  FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateImageDirective } from './translate-image.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlagfetchComponent,
     FlagInfoComponent,
-    ImageheightDirective
+    ImageheightDirective,
+    TranslateImageDirective
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { ImageheightDirective } from './imageheight.directive';
     HttpClientModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
