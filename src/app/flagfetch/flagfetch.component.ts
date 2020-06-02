@@ -1,3 +1,4 @@
+import { HeaderComponent } from './../header/header.component';
 import { Component, OnInit } from '@angular/core';
 import {FlagsService} from '../flags.service';
 import { Router } from '@angular/router';
@@ -12,26 +13,20 @@ let mobileTransl=screen.width>500?'translateX(-100%)':'translateY(100%)';
   styleUrls: ['./flagfetch.component.scss'],
   animations:[
     trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
+      transition('* => *', [ 
         query(':leave', [
+          style({opacity:1}),
           stagger(0, [
-            animate('0.05s', style({ opacity: 0 }))
+            animate('0.2s', style({ opacity: 0 }))
           ])
         ], { optional: true }),
         query(':enter', [
           style({ opacity: 0,transform:`translate(${screenString})` }),
           stagger(30, [
-            animate('0.2s', style({ opacity: 1,transform:'translate(0,0)' }))
+            animate('0.3s', style({ opacity: 1,transform:'translate(0,0)' }))
           ])
         ], { optional: true })
       ])
-    ]),
-    trigger('childPresent',[
-      transition(':leave',[
-        style({transform:'none'}),
-        animate('0.2s',style({transform:`${mobileTransl}`}))
-      ])
-
     ])
   ]
 })
@@ -52,10 +47,6 @@ export class FlagfetchComponent implements OnInit {
               private _router:Router) { }
 
   ngOnInit(): void {
-    this._flags.flagsAll().subscribe(data =>{
-      this.flagSrc=this.arrayParser(data,[],'flag')
-      this.flagName=this.arrayParser(data,[],'name')
-    })
     this.txValue=[]
   }
 

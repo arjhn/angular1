@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ImageheightDirective } from './imageheight.directive';
 import {  FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateImageDirective } from './translate-image.directive';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TranslateImageDirective } from './translate-image.directive';
     FlagfetchComponent,
     FlagInfoComponent,
     ImageheightDirective,
-    TranslateImageDirective
+    TranslateImageDirective,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

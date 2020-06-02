@@ -1,12 +1,25 @@
+import { HeaderComponent } from './../header/header.component';
 import { WikiInfoService } from './../wiki-info.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FlagsService } from '../flags.service';
+import { trigger,transition,animate,style,state, query, stagger, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-flag-info',
   templateUrl: './flag-info.component.html',
-  styleUrls: ['./flag-info.component.scss']
+  styleUrls: ['./flag-info.component.scss'],
+  animations:[
+    trigger('infoListen',[
+      transition(":enter",[
+        style({opacity: 0,transform:`translateX(100%)`}),
+        animate('0.3s ease-in-out', style({ opacity: 1,transform:'translateX(0)' }))
+      ]),
+      transition(":leave",[
+        animate('0.3s', style({ opacity: 0,transform:'translateX(-100%)' }))
+      ]),
+    ])
+  ]
 })
 export class FlagInfoComponent implements OnInit {
 

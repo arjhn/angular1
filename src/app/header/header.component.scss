@@ -1,0 +1,38 @@
+$colorVar:#3F51B5;
+
+ul{ 
+    font-size: 1.6em;
+    li{
+        list-style: none;
+        padding: 0.2em 1em 0.2em 0.4em;
+        width: 5vw;
+        a{
+            text-decoration: none;
+            position: relative;
+            color: rgba($color: #000000, $alpha: 0.5);
+
+            &:hover{
+                color:$colorVar;
+            }
+
+            &:before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                visibility: hidden;
+                height: 2px;
+                bottom: 0px;
+                left:0px;
+                background-color: $colorVar;
+                transform: scaleX(0);
+                transition: all 0.3s ease-in-out;
+            }
+
+            &:hover:before{
+                visibility: visible;
+                transform: scaleX(1.2);
+            }
+            
+        }
+    }
+}

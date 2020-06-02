@@ -1,17 +1,38 @@
-<div class="innercontainer" [@childPresent]="presentFlag" *ngIf='!presentFlag' >
+<div class="innercontainer">
   
-  <mat-form-field class="searchbar" *ngIf='!presentFlag' >
-    <mat-label>Search</mat-label>
-    <input type="search" matInput placeholder="Country Name" [ngModel]="searchValue" (ngModelChange)='flagSearch($event)'>
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
+  <div class="fHomeHeader" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="0.5em">
+
+    <mat-form-field class="searchbar" fxFlex='1 1 40%' >
+      <mat-label>Search</mat-label>
+      <input type="search" matInput placeholder="Country Name" [ngModel]="searchValue" (ngModelChange)='flagSearch($event)'>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <div fxFlex="1 1 10%"></div>
+    <app-header fxFlex='1 1 20%'></app-header>
+    <div fxFlex="1 1 5%"></div>
+
+  </div>
   
-  <div> 
+  <div *ngIf="flagName"> 
+
     <ul [@listAnimation]="flagName">
+
       <li *ngFor="let Flag of flagName;let i=index">
+
         <img [src]="flagSrc[i]" (click)="redirectFlag(Flag)" appImageheight (onValueUpdate)="translateValue($event)">
-          <p [style.transform]="'translateY('+txValue[i]+'px)'">{{Flag}}</p>
+        <p [style.transform]="'translateY('+txValue[i]+'px)'">{{Flag}}</p>
+      
       </li>
     </ul>
+
   </div>
+
+  <div class="introClass" *ngIf="!flagName">
+    <p>Hey,</p>
+    <p>The WebApp displays a few details about the countries you search for in the SearchBar above </p> 
+    <p>Feel free to checkout.</p>
+    <p>Thanks a ton !!</p>
+  </div>
+
 </div>

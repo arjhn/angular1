@@ -1,4 +1,9 @@
-<div *ngFor="let country of countryDetails" class="infoContainer" fxLayout="column" >
+<div *ngFor="let country of countryDetails" class="infoContainer" fxLayout="column" @infoListen >
+    
+    <div class="header" fxLayout="row" fxLayoutAlign="end">
+        <app-header fxFlex='1 1 20%'></app-header>
+    </div>
+
     <div class="top">
         <div>
             <img [src]="country.flag" appTranslateImage>
